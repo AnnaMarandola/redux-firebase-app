@@ -5,10 +5,11 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: url(/image/L.jpg) no-repeat;
+  background: url(/image/L.jpg) no-repeat ;
   background-size: 60%;
-  background-position: bottom;
-  background-color: whitesmoke;
+  position: relative;
+  background-position: bottom right;
+  /* background-color: grey; */
   min-height: 100%;
 }
 
@@ -16,6 +17,7 @@ form {
   padding: 20px;
   margin-top: 60px;
   border: 1px solid pink;
+  width: 70%;
 }
 
 form button, form h5{
