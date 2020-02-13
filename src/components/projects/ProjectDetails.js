@@ -1,24 +1,47 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {firestoreConnect} from 'react-redux-firebase';
+import {compose} from 'redux';
 
-const ProjectDetails = (props) => {
-    const id = props.match.params.id;
+const ProjectDetails = props => {
+  const {project} = props;
+  if (project) {
     return (
-        <div className="container section project-details">
+      <div className="container section project-details">
         <div className="card z-depth-0">
-            <div className="card-content">
-            <img alt="pate" src="https://fac.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Ffac.2F2018.2F07.2F30.2Fee40d50a-58a2-4bf3-a2f1-26df2bfef858.2Ejpeg/748x372/quality/80/crop-from/center/pate-a-pizza-sans-gluten.jpeg"/>
-                <span className="card-title">Project Title - {id} </span>
-            <p>Spatio neque et quis Turpis rogati accipienda minime res accipienda accipienda sanciatur Etenim Turpis fecisse spatio Etenim lex de amicitia et et rem publicam neque curriculoque ut futuros Deflexit causa curriculoque minime de nec fateatur sanciatur in prospicere loco fateatur faciamus Deflexit rogemus amicitia nec nec tum oporteat Fanni peccatis spatio se curriculoque ceteris faciamus nec ut publicam et ut accipienda rem quis fecisse res iam est si sumus oporteat se longe locati rogati futuros spatio spatio tum peccatis tum amici ut in causa et ut Fanni sanciatur publicam lex fateatur de in si consuetudo excusatio fecisse lex et accipienda.</p>
-            </div>
-            <div className="card-action gret lighten-4 grey-text">
-            <div>Posted by Anna</div>
+          <div className="card-content">
+            <img alt="pate" src={project.url} />
+            <span className="card-title">{project.title} </span>
+            <p>{project.content}</p>
+          </div>
+          <div className="card-action gret lighten-4 grey-text">
+            <div>Posted by {project.authorFirstName}</div>
             <div>11 février, 20:21</div>
 
-            </div>
+          </div>
         </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="container center">
+        <p>Loading project...</p>
+      </div>
+    );
+  }
+};
 
-        </div>
-    )
-}
+const mapStateToProps = (state, ownProps) => {
+  // console.log(state)
+  const id = ownProps.match.params.id;
+  const projects = state.firestore.data.projects;
+  const project = projects ? projects[id] : null;
+  return {
+    project: project,
+  };
+};
 
-export default ProjectDetails;
+export default compose (
+  connect (mapStateToProps),
+  firestoreConnect ([{collection: 'projects'}])
+) (ProjectDetails);
