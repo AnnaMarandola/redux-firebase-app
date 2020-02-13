@@ -4,7 +4,7 @@ import  { createProject } from '../../store/actions/projectActions';
 
 export class CreateProject extends Component {
     state = {
-        pictureUrl: '',
+        url: '',
         title: '',
         content: ''
 
@@ -27,8 +27,8 @@ export class CreateProject extends Component {
             <form className="white" onSubmit={this.handleSubmit}>
                 <h5 className="grey-text text-darken-3">Create new project</h5>
                 <div className="input-field">
-                    <label htmlFor="pictureUrl">Picture url</label>
-                    <input type="text" id="pictureUrl" onChange={this.handleChange}/>
+                    <label htmlFor="url">Picture url</label>
+                    <input type="text" id="url" onChange={this.handleChange}/>
                 </div>
                 <div className="input-field">
                     <label htmlFor="title">Title</label>
