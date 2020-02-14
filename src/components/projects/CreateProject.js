@@ -21,11 +21,12 @@ export class CreateProject extends Component {
         e.preventDefault();
         this.props.createProject(this.state)
         // console.log(this.state)
+        this.props.history.push('/')
     }
     render () {
         const { auth } = this.props;
         if (!auth.uid) return <Redirect to='/signin'/>
-        
+
         return(
             <div className="container">
             <form className="white" onSubmit={this.handleSubmit}>
