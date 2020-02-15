@@ -1,5 +1,6 @@
 import React from 'react';
-import Card from './Card.css';
+import moment from 'moment';
+import './Card.css';
 
 const ProjectSummary = ({project}) => {
     return (
@@ -8,7 +9,7 @@ const ProjectSummary = ({project}) => {
           <span className="card-title">{project.title}</span>
           <img className="enigme-image" src={project.url}/>
           <p>Posted by {project.authorFirstName} {project.authorLastName}</p>
-          <p className="grey-text">11 février, 20:20</p>
+          <p className="grey-text">{moment(project.createAt.toDate()).calendar()}</p>
         </div>
       </div>
     )
